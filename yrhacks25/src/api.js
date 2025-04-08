@@ -1,10 +1,10 @@
 //npm install @google/genai
 import { GoogleGenAI } from "@google/genai";
 
-// api key
+// api keys
 const ai = new GoogleGenAI({ apiKey: "AIzaSyA_MpOm8aTNoNi5aYeGsEj4TIEnFZVM2xU" });
 
-async function AI(arg) {
+export async function createRecipe(arg) {
     const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
         contents: arg,
@@ -67,16 +67,17 @@ async function AI(arg) {
                             },
                             required: ['calories', 'protein', 'fat'],
                         },
+                        estimatedCookingTime:{
+                            type: 'number',
+                            description: 'Estimated time it takes to create in minutes',
+                        }
                     },
                     required: ['recipeName', 'nutrients', 'instructions', 'description', 'itemsNeeded'],
                 },
             },
         },
     });
-    const recipe = JSON.parse(response.text);
-    data.push(recipe);
-    console.log(recipe); // Optional: log to console
+    const recipe = JSON.parse(response.text); // add to data
+    console.log(recipe); // log 
+    return recipe;
 }
-
-AI("gimme a lasagna recipe")
-AI("gimme a cookie recipe")
