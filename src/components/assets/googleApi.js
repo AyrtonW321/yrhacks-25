@@ -98,3 +98,59 @@ export async function categorize(arg) {
     console.log(category); // log
     return category; 
 }
+
+export async function readImage(imagePath) {
+    // Define the prompt text
+    const arg = `Tell me what the name of the food shown in this image is,
+    return a food name with the 'foodName' property`;
+
+    try {
+        // Fetch the image and convert it into a Blob
+        const response = await fetch(imagePath);
+        const imageBlob = await response.blob();
+
+        // Prepare FileReader
+        const reader = new FileReader();
+
+        // Return a Promise to handle the asynchronous FileReader
+        return new Promise((resolve, reject) => {
+            reader.onloadend = async () => {
+                try {
+                    const imageData = reader.result.split(',')[1]; // Get base64 data
+
+                    // Make the API call
+                    const apiResponse = await ai.models.generateContent({
+                        model: "gemini-1.5-pro",
+                        contents: [
+                            { text: arg },
+                            { inlineData: { mimeType: "image/jpg", data: imageData } }
+                        ]
+                    });
+
+                    // Clean the response text to remove markdown formatting
+                    const cleanText = apiResponse.text.replace(/```json|```/g, '').trim();
+
+                    // Parse the JSON response
+                    const parsedResponse = JSON.parse(cleanText);
+                    console.log(parsedResponse);
+                    parsedResponse['imagePath'] = imagePath;
+                    resolve(parsedResponse);
+                } catch (error) {
+                    console.error("Error during API call or parsing response:", error);
+                    reject(error);
+                }
+            };
+
+            reader.onerror = (error) => {
+                console.error("Error reading image file:", error);
+                reject(error);
+            };
+
+            // Trigger the FileReader
+            reader.readAsDataURL(imageBlob);
+        });
+    } catch (error) {
+        console.error("Error fetching the image:", error);
+        throw error;
+    }
+}

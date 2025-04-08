@@ -1,4 +1,4 @@
-import * as aiFunctions from './api.js';
+import * as aiFunctions from './googleApi.js';
 
 let data = [];
 
@@ -32,4 +32,7 @@ function foodType(food, categories){
     return category
 }
 
-console.log(foodType("egg", ["vegetables","meat" ,"fruit"]))
+function findImage(path){
+    let name = aiFunctions.readImage(path)
+    console.log(name);
+}
