@@ -70,6 +70,10 @@ export async function createRecipe(arg) {
                         estimatedCookingTime:{
                             type: 'number',
                             description: 'Estimated time it takes to create in minutes',
+                        },
+                        indexValue: {
+                            type: 'number',
+                            description: 'Return the index of the recipe choosen',
                         }
                     },
                     required: ['recipeName', 'nutrients', 'instructions', 'description', 'itemsNeeded'],

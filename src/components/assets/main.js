@@ -1,18 +1,34 @@
 import * as aiFunctions from './googleApi.js';
 
-let data = [];
+let recipeData = 'public/datasets/food-ingredients-and-recipe-dataset-with-images/mapping.json';
 
-let made = [];
+const recipeDataURL = 'public/datasets/food-ingredients-and-recipe-dataset-with-images/mapping.json'
+
+// fetch json data
+fetch(recipeDataURL)  // Replace with your URL
+  .then(response => {
+    // Check if the response is okay (status 200-299)
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.json();  // Parse the JSON from the response
+  })
+  .then(recipeData => {
+    console.log(recipeData);  // Handle the JSON data (an object or array)
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+});
 
 // depending on what is in the fridge make sure we have enough ingredients
 // create an argument for the ai
 function buildPrompt(ingredients, nutrients, dietary, time){
-    let arg = `Ingredients I have ${JSON.stringify(ingredients)}, you do not have to use all of them 
+    let arg = `These are all the recipes ${recipeData}, choose a recipe between them,
+    Ingredients I have ${JSON.stringify(ingredients)}, you do not have to use all of them 
     but you cannot use more than what we have,
         Nutrients I want are a lot of ${JSON.stringify(nutrients)},
         The dietary restrictions I have are ${JSON.stringify(dietary)}, these must be followed,
         I want to create the food in ${time} minutes, this is not concrete but should be around the time,
-        We already have the recipes ${JSON.stringify(made)}, don't make these recipes again
     `;
     let newRecipe = aiFunctions.createRecipe(arg);
     data.push(newRecipe);
