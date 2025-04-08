@@ -1,4 +1,4 @@
-import * as aiFunctions from './api.js';
+import * as aiFunctions from './googleApi.js';
 
 let data = [];
 
@@ -16,20 +16,22 @@ function buildPrompt(ingredients, nutrients, dietary, time){
     `;
     let newRecipe = aiFunctions.createRecipe(arg);
     data.push(newRecipe);
-    made.push(newRecipe[recipeName])
+    made.push(newRecipe['recipeName'])
+    return newRecipe;
 }
 
 // returns the category the food is in, based on given categories
 // first parameter the food
 // second parameter array of categories
-function foodType(food, categories){
+export async function foodType(food, categories){
     let arg = `These are all the catgeories I have: ${JSON.stringify(categories)}, these are set in place make sure you return one of these,
     I have this food: ${food} what category does it fit in?
     Return "other" if there really is not an option`
     ;
-    let category = aiFunctions.categorize(arg);
+    let category = await aiFunctions.categorize(arg);
     // returns other if there really is not an option
     return category
 }
+
 
 console.log(foodType("egg", ["vegetables","meat" ,"fruit"]))
