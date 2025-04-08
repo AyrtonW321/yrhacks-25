@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Shopping List</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div class="navContainer">
+        <a href="/" class="logoContainer">
+          <img src="/logo.png" alt="Logo" class="logo" />
+          <span class="siteName">FridgeMate</span>
+        </a>
+        <nav class="navbar">
+          <a href="/">Home</a>
+          <a href="/fridge">My Fridge</a>
+          <a href="/recipes">My Recipes</a>
+          <a href="/shoppingList">My Shopping List</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="shoppingListContainer">
+      <h1>Shopping List</h1>
+      <div class="list-actions">
+        <input type="text" id="ingredientInput" placeholder="e.g. 2 Tomatoes" />
+        <select id="categorySelect">
+          <option value="Vegetables">Vegetables</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Meat">Meat</option>
+          <option value="Seafood">Seafood</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Grains">Grains</option>
+          <option value="Other">Other</option>
+        </select>
+        <button onclick="addIngredient()">Add Ingredient</button>
+      </div>
+
+      <div class="list-section">
+        <h2>Active Ingredients</h2>
+        <ul id="activeList" class="ingredient-list"></ul>
+      </div>
+
+      <div class="list-section">
+        <h2>Completed Ingredients</h2>
+        <ul id="completedList" class="ingredient-list"></ul>
+      </div>
+    </main>
+
+    <script>
+      window.addEventListener("scroll", function () {
+        const header = document.querySelector("header");
+        header.classList.toggle("sticky", window.scrollY > 0);
+      });
+
+      function formatIngredient(rawInput) {
+        let quantity = 1;
+        let name = rawInput.trim().toLowerCase();
+
+        const quantityMatch =
+          name.match(/(\d+)\s*x*\s*([a-z\s]+)/i) ||
+          name.match(/([a-z\s]+)\s*x*\s*(\d+)/i);
+
+        if (quantityMatch) {
+          if (!isNaN(quantityMatch[1])) {
+            quantity = parseInt(quantityMatch[1]);
+            name = quantityMatch[2];
+          } else {
+            quantity = parseInt(quantityMatch[2]);
+            name = quantityMatch[1];
+          }
+        }
+
+        name = name.trim().replace(/\s+/g, " ");
+        name = name.charAt(0).toUpperCase() + name.slice(1);
+
+        return { quantity, name };
+      }
+
+      function addIngredient() {
+        const input = document.getElementById("ingredientInput");
+        const category = document.getElementById("categorySelect").value;
+        const value = input.value.trim();
+        if (!value) return;
+
+        const { quantity, name } = formatIngredient(value);
+        const date = new Date().toLocaleDateString();
+
+        const li = createIngredientItem(quantity, name, category, date);
+        document.getElementById("activeList").appendChild(li);
+        input.value = "";
+      }
+
+      function createIngredientItem(quantity, name, category, date) {
+        const li = document.createElement("li");
+
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+
+        const textSpan = document.createElement("span");
+        textSpan.textContent = ` ${quantity}x ${name} | ${category} | ${date}`;
+
+        checkbox.addEventListener("change", () => {
+          const targetList = checkbox.checked ? "completedList" : "activeList";
+          document.getElementById(targetList).appendChild(li);
+        });
+
+        li.appendChild(checkbox);
+        li.appendChild(textSpan);
+
+        return li;
+      }
+    </script>
+  </body>
+</html>
