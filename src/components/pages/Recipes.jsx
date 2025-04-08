@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Recipes.css";
 
 const RecipePage = () => {
-  const recipes = [
-    { name: "Pasta", image: "pasta.jpeg" },
-    { name: "Pasta", image: "pasta.jpeg" },
-    { name: "Pasta", image: "pasta.jpeg" },
-  ];
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('aiRecipe');
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      setRecipes(parsed); // expects an array from the AI
+    }
+  }, []);
+
+  if (!recipes.length) return <p>No recipes available. Use AI to generate one!</p>;
 
   return (
     <div className="recipe-page">
@@ -15,16 +21,28 @@ const RecipePage = () => {
         <div className="recent-recipe-box">
           <div className="left-column">
             <div className="image-box">
-              <img src={recipes[0].image} alt={recipes[0].name}></img>
+              <img src={recipes[0].imageURL} alt={recipes[0].recipeName} />
             </div>
-            <div className="ingredients-box">INGREDIENTS OF RECIPE</div>
+            <div className="ingredients-box">
+              <h4>Ingredients</h4>
+              <ul>
+                {recipes[0].itemsNeeded.map((item, index) => (
+                  <li key={index}>{item.quantity} of {item.name}</li>
+                ))}
+              </ul>
+            </div>
           </div>
           <div className="right-column">
             <div className="recipe-name-container">
-              {recipes[0].name}
+              {recipes[0].recipeName}
             </div>
             <div className="instructions-box">
-              INSTRUCTIONS / PROCEDURE FOR RECIPE
+              <h4>Instructions</h4>
+              <ol>
+                {recipes[0].instructions.map((step, index) => (
+                  <li key={index}>{step}</li>
+                ))}
+              </ol>
             </div>
           </div>
         </div>
@@ -38,9 +56,9 @@ const RecipePage = () => {
           {recipes.map((recipe, index) => (
             <div className="recipe-card" key={index}>
               <div className="recipe-image">
-                <img src={recipe.image} alt={recipe.name} />
+                <img src={recipe.imageURL} alt={recipe.recipeName} />
               </div>
-              <div className="recipe-name">{recipe.name}</div>
+              <div className="recipe-name">{recipe.recipeName}</div>
             </div>
           ))}
         </div>
