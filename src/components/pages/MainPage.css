@@ -22,7 +22,7 @@
   align-items: center;
   padding: 20px;
 
-  background-color: rgba(247, 247, 247, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
@@ -38,7 +38,7 @@
   color: black;
   background-color: white;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 30px;
   flex: 1;
 }
 
@@ -65,14 +65,16 @@
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
+  z-index: 99;
 }
 
 .mainPageCard {
   background-color: white;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   padding-bottom: 15px;
+  z-index: 99;
 }
 
 .mainPageCard h2 {
