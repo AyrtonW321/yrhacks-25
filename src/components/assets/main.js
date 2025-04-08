@@ -16,8 +16,11 @@ function buildPrompt(ingredients, nutrients, dietary, time){
     `;
     let newRecipe = aiFunctions.createRecipe(arg);
     data.push(newRecipe);
-    made.push(newRecipe[recipeName])
+    made.push(newRecipe['recipeName'])
+    return newRecipe;
 }
+
+console.log(buildPrompt(['egg', 'vegetable', 'rice', 'sugar'], [], [], 'any'))
 
 // returns the category the food is in, based on given categories
 // first parameter the food

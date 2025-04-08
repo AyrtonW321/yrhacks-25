@@ -70,9 +70,13 @@ export async function createRecipe(arg) {
                         estimatedCookingTime:{
                             type: 'number',
                             description: 'Estimated time it takes to create in minutes',
+                        },
+                        imageURL: {
+                            type: 'string',
+                            description: 'Give me a google image url of the food made',
                         }
                     },
-                    required: ['recipeName', 'nutrients', 'instructions', 'description', 'itemsNeeded'],
+                    required: ['recipeName', 'nutrients', 'instructions', 'description', 'itemsNeeded', 'imageURL'],
                 },
             },
         },
