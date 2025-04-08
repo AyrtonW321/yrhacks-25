@@ -74,6 +74,10 @@ export async function createRecipe(arg) {
                         imageURL: {
                             type: 'string',
                             description: 'Give me a google image url of the food made',
+                        },
+                        indexValue: {
+                            type: 'number',
+                            description: 'Return the index of the recipe choosen',
                         }
                     },
                     required: ['recipeName', 'nutrients', 'instructions', 'description', 'itemsNeeded', 'imageURL'],
