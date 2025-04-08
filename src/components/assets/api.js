@@ -77,7 +77,24 @@ export async function createRecipe(arg) {
             },
         },
     });
-    const recipe = JSON.parse(response.text); // add to data
+    let recipe = JSON.parse(response.text); // add to data
     console.log(recipe); // log 
     return recipe;
+}
+
+export async function categorize(arg) {
+    const response = await ai.models.generateContent({
+        model: "gemini-2.0-flash",
+        contents: arg, 
+        config: {
+            responseMimeType: 'application/json',
+            responseSchema: {
+                type: 'string',
+                description: 'The category the food is in',
+            }
+        },
+    })
+    let category = JSON.parse(response.text);
+    console.log(category); // log
+    return category; 
 }
