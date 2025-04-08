@@ -21,7 +21,7 @@ const NavBar = () => {
             <div className="navContainer">
                 <Link to="/" className="logoContainer">
                     <img src="/logo.png" alt="Logo" className="logo" />
-                    <span className="siteName">FridgeMate</span> {/* <-- Your site/page name */}
+                    <span className="siteName">FridgeMate</span>
                 </Link>
                 <nav className="navbar">
                     <Link to="/">Home</Link>
