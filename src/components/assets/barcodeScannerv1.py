@@ -2,7 +2,7 @@ import cv2
 from pyzbar.pyzbar import decode
 import numpy as np
 import collections
-import time
+import os
 
 # Smoothing and persistence config
 BOX_HISTORY_LENGTH = 5
@@ -20,6 +20,14 @@ frame_count = 0
 # Track barcode confidence
 barcode_confidence = collections.defaultdict(int)
 confirmed_barcodes = set()
+
+# Folder to save screenshots (inside public -> dataset)
+public_folder = "public"
+screenshot_folder = os.path.join(public_folder, "screenshot")
+
+# Create the 'public/dataset' folder if it doesn't exist
+if not os.path.exists(screenshot_folder):
+    os.makedirs(screenshot_folder)
 
 def draw_product_box(frame, barcode_data, avg_box, expansion_ratio=3.0):
     try:
@@ -54,6 +62,24 @@ def draw_product_box(frame, barcode_data, avg_box, expansion_ratio=3.0):
     except Exception as e:
         print(f"Error drawing box: {str(e)}")
 
+def save_screenshot(frame, barcode_data):
+    try:
+        # Generate a filename based on the barcode data
+        filename = os.path.join(screenshot_folder, f"{barcode_data}.jpg")
+        
+        # Check if the file already exists
+        if os.path.exists(filename):
+            print(f"Screenshot already exists: {filename}")
+            return True  # File already exists, no need to save
+
+        # Save the screenshot
+        cv2.imwrite(filename, frame)
+        print(f"Saved screenshot: {filename}")
+        return False
+    except Exception as e:
+        print(f"Error saving screenshot: {str(e)}")
+        return False
+
 def main():
     global frame_count
     cap = cv2.VideoCapture(0)
@@ -84,12 +110,6 @@ def main():
         for obj in decoded_objects:
             barcode_data = obj.data.decode("utf-8")
 
-            '''
-            # Optional: ignore invalid barcodes (e.g., non-13-digit numerics)
-            if not (barcode_data.isdigit() and len(barcode_data) in [12, 13]):
-                continue
-            '''
-
             x, y, w, h = obj.rect
             box_history[barcode_data].append((x, y, w, h))
             last_seen_frame[barcode_data] = frame_count
@@ -98,6 +118,14 @@ def main():
             barcode_confidence[barcode_data] += 1
             if barcode_confidence[barcode_data] >= CONFIRMATION_THRESHOLD:
                 confirmed_barcodes.add(barcode_data)
+
+                # Save screenshot when barcode is confirmed
+                save_screenshot(frame, barcode_data)
+
+                # Close the camera after barcode is found
+                cap.release()
+                cv2.destroyAllWindows()
+                return
         
         # Every N frames, remove stale data
         if frame_count % 100 == 0:
