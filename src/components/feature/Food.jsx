@@ -1,7 +1,7 @@
-function Food({ name }) {
+function Food({ name , quantity}) {
     return (
         <div className="foodContainer">
-          <p className="foodName">{name}</p>
+          <p className="foodName">{name} ({quantity})</p>
         </div>
     )
   }
