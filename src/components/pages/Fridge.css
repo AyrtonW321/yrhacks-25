@@ -1,71 +1,96 @@
-.fridgeGridContainer{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;  
-    width: 100%;
-    margin-top: 3rem;
-    max-width: 1200px;
-  }
-  
-  .fridgeContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: sans-serif;
-    padding-top: 5%;
-  }
-  
-  .categorySection{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;  
-    width: 100%;
-    max-width: 1200px;
-  }
-  
-  .categoryContainer{
-    display: flex;
-    padding-bottom: 30%;
-    padding-left: 30%;
-    padding-right: 30%;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    flex-direction: column;
-    color: #666;
-    font-size: 0.9rem;
-  }
-  
-  .foodInput{
-    border-color: rgb(161, 159, 159);
-    border-style: solid;
-    border-radius: 5px;
-    width: 300px;
-    height: 36px;
-  }
-  
-  .addButton{
-    background-color: #d5b096;
-    color: #000000;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-    padding: 10px 20px;
-  }
-  
-  .inputBar{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+.fridgeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+  padding-top: 5%;
+}
 
-  .categoryName{
-    padding-top: 10px;
-    color: #333333;
-    justify-content: center;
-    align-items: center;
-  }
+.fridgeContainer h1 {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: #2b2b2b;
+  margin-bottom: 20px;
+}
 
+.inputBar {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.foodInput {
+  padding: 12px 25px;
+  margin: 0 5px;
+  color: black;
+  background-color: white;
+  border: 2px solid #d5b096;
+  border-radius: 30px;
+  flex: 1;
+  height: auto;
+  width: auto;
+}
+
+.addButton {
+  padding: 10px 20px;
+  margin-left: 5px;
+  border: none;
+  background-color: #d5b096;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-weight: bold;
+}
+
+.addButton:hover {
+  background-color: #ad917d;
+}
+
+.fridgeGridContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  margin-top: 3rem;
+  max-width: 1200px;
+}
+
+.categorySection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.categoryContainer {
+  display: flex;
+  padding-bottom: 30%;
+  padding-left: 30%;
+  padding-right: 30%;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.categoryName {
+  padding-top: 10px;
+  color: #333333;
+  justify-content: center;
+  align-items: center;
+}

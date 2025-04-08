@@ -51,7 +51,7 @@ function Fridge() {
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
         />
-        <button onClick={addFood} className="addButton">Add</button>
+        <button onClick={addFood} className="addButton">Add Food</button>
       </div>
 
       <div className="fridgeGridContainer">

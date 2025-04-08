@@ -65,15 +65,19 @@ const ShoppingList = () => {
   };
 
   return (
-    <main class="shoppingListContainer">
+    <main className="shoppingListContainer">
       <h1>Shopping List</h1>
-      <div class="list-actions">
-        <input
-          type="text"
-          value={ingredientInput}
-          onChange={(e) => setIngredientInput(e.target.value)}
-          placeholder="e.g. 2 Tomatoes"
-        />
+      <div className="list-actions">
+        <div className="input-container">
+          <input
+            type="text"
+            className="ingredient-input"
+            value={ingredientInput}
+            onChange={(e) => setIngredientInput(e.target.value)}
+            placeholder="e.g. 2 Tomatoes"
+          />
+        </div>
+
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
           <option value="Vegetables">Vegetables</option>
           <option value="Fruits">Fruits</option>
@@ -86,41 +90,41 @@ const ShoppingList = () => {
         <button onClick={handleAddIngredient}>Add Ingredient</button>
       </div>
 
-      <div className="list-section">
-        <h2>Active Ingredients</h2>
-        <ul className="ingredient-list">
-          {activeList.map((item) => (
-            <li key={item.id}>
-              <input
-                type="checkbox"
-                onChange={() => handleToggle(item, true)}
-              />
-              <span>
-                {" "}
-                {item.quantity}x {item.name} | {item.category} | {item.date}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
+      <div className="lists-container">
+        <div className="list-section">
+          <h2>Active Ingredients</h2>
+          <ul className="ingredient-list">
+            {activeList.map((item) => (
+              <li key={item.id}>
+                <input
+                  type="checkbox"
+                  onChange={() => handleToggle(item, true)}
+                />
+                <span>
+                  {item.quantity}x {item.name} | {item.category} | {item.date}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="list-section">
-        <h2>Completed Ingredients</h2>
-        <ul className="ingredient-list">
-          {completedList.map((item) => (
-            <li key={item.id}>
-              <input
-                type="checkbox"
-                checked
-                onChange={() => handleToggle(item, false)}
-              />
-              <span>
-                {" "}
-                {item.quantity}x {item.name} | {item.category} | {item.date}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <div className="list-section">
+          <h2>Completed Ingredients</h2>
+          <ul className="ingredient-list">
+            {completedList.map((item) => (
+              <li key={item.id}>
+                <input
+                  type="checkbox"
+                  checked
+                  onChange={() => handleToggle(item, false)}
+                />
+                <span>
+                  {item.quantity}x {item.name} | {item.category} | {item.date}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </main>
   );

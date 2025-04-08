@@ -10,22 +10,22 @@
 
 .searchBarContainer {
   width: 100%;
-  max-width: 600px;
+  max-width: 1200px; /* Match the grid */
   margin: 20px auto;
   margin-top: 4rem;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
 
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
 }
+
 
 .searchBar {
   display: flex;
@@ -33,11 +33,11 @@
 }
 
 .searchBar input {
-  padding: 10px;
+  padding: 12px 25px;
   margin: 0 5px;
   color: black;
   background-color: white;
-  border: 1px solid #ccc;
+  border: 2px solid #d5b096;
   border-radius: 30px;
   flex: 1;
 }
@@ -51,6 +51,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  font-weight: bold;
 }
 
 .searchBar button:hover {

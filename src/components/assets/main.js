@@ -1,5 +1,4 @@
 import * as aiFunctions from './googleApi.js';
-import * as aiFunctions from './googleApi.js';
 
 let data = [];
 
