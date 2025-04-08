@@ -1,11 +1,10 @@
 function Food({ name }) {
     return (
-      <>
-          <div className="foodCard">
-            <p className="foodName">{name}</p>
-          </div> 
-      </>
+        <div className="foodContainer">
+          <p className="foodName">{name}</p>
+        </div>
     )
   }
   
-export default Food;
+export default Food
+  
