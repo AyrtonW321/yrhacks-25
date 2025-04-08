@@ -31,6 +31,13 @@ async function fetchRecipeData() {
   // Call the function to fetch the data
 fetchRecipeData();
 
+function customPrompt(text){
+    let arg = `Choose a recipe from ${recipeData}, must be between these,
+    and base it off of this text ${text}`
+    let newRecipe = aiFunctions.createRecipe(arg);
+    return newRecipe
+}
+
 // depending on what is in the fridge make sure we have enough ingredients
 // create an argument for the ai
 function buildPrompt(ingredients, nutrients, dietary, time){
@@ -42,8 +49,6 @@ function buildPrompt(ingredients, nutrients, dietary, time){
         I want to create the food in ${time} minutes, this is not concrete but should be around the time,
     `;
     let newRecipe = aiFunctions.createRecipe(arg);
-    data.push(newRecipe);
-    made.push(newRecipe['recipeName'])
     return newRecipe;
 }
 
