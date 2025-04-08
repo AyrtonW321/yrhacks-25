@@ -8,5 +8,4 @@ function Food({ name }) {
     )
   }
   
-export default Food
-  
+export default Food;
