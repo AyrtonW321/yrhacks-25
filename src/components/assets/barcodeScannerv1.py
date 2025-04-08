@@ -117,15 +117,17 @@ def main():
             # Confidence logic
             barcode_confidence[barcode_data] += 1
             if barcode_confidence[barcode_data] >= CONFIRMATION_THRESHOLD:
-                confirmed_barcodes.add(barcode_data)
+                filename = os.path.join(screenshot_folder, f"{barcode_data}.jpg")
+                if not os.path.exists(filename):
+                    # Save screenshot when barcode is confirmed
+                    save_screenshot(frame, barcode_data)
+                    # Close the camera after barcode is found
+                    cap.release()
+                    cv2.destroyAllWindows()
+                    return
+                else:
+                    confirmed_barcodes.add(barcode_data)
 
-                # Save screenshot when barcode is confirmed
-                save_screenshot(frame, barcode_data)
-
-                # Close the camera after barcode is found
-                cap.release()
-                cv2.destroyAllWindows()
-                return
         
         # Every N frames, remove stale data
         if frame_count % 100 == 0:
