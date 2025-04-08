@@ -1,35 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import "./Recipes.css";
 
 const RecipePage = () => {
   const [recipes, setRecipes] = useState([]);
-  const location = useLocation();
 
   useEffect(() => {
-    // Check for recipe passed via navigation state
-    if (location.state?.aiRecipe) {
-      setRecipes([location.state.aiRecipe]);
-      return;
-    }
-    
-    // Fallback to localStorage
     const stored = localStorage.getItem('aiRecipe');
     if (stored) {
-      try {
-        setRecipes([JSON.parse(stored)]);
-      } catch (e) {
-        console.error("Error parsing stored recipe", e);
-      }
+      const parsed = JSON.parse(stored);
+      setRecipes(parsed); // expects an array from the AI
     }
-  }, [location.state]);
+  }, []);
 
   if (!recipes.length) return <p>No recipes available. Use AI to generate one!</p>;
-
-  // Ensure we have the expected structure
-  const currentRecipe = recipes[0] || {};
-  const itemsNeeded = currentRecipe.itemsNeeded || [];
-  const instructions = currentRecipe.instructions || [];
 
   return (
     <div className="recipe-page">
@@ -38,34 +21,46 @@ const RecipePage = () => {
         <div className="recent-recipe-box">
           <div className="left-column">
             <div className="image-box">
-              {currentRecipe.imageURL && (
-                <img src={currentRecipe.imageURL} alt={currentRecipe.recipeName} />
-              )}
+              <img src={recipes[0].imageURL} alt={recipes[0].recipeName} />
             </div>
             <div className="ingredients-box">
               <h4>Ingredients</h4>
               <ul>
-                {itemsNeeded.map((item, index) => (
-                  <li key={index}>
-                    {item.quantity} {item.name}
-                  </li>
+                {recipes[0].itemsNeeded.map((item, index) => (
+                  <li key={index}>{item.quantity} of {item.name}</li>
                 ))}
               </ul>
             </div>
           </div>
           <div className="right-column">
             <div className="recipe-name-container">
-              {currentRecipe.recipeName}
+              {recipes[0].recipeName}
             </div>
             <div className="instructions-box">
               <h4>Instructions</h4>
               <ol>
-                {instructions.map((step, index) => (
+                {recipes[0].instructions.map((step, index) => (
                   <li key={index}>{step}</li>
                 ))}
               </ol>
             </div>
           </div>
+        </div>
+      </section>
+
+      <hr />
+
+      <section className="past-recipes">
+        <h2>Past Recipes</h2>
+        <div className="past-recipes-grid">
+          {recipes.map((recipe, index) => (
+            <div className="recipe-card" key={index}>
+              <div className="recipe-image">
+                <img src={recipe.imageURL} alt={recipe.recipeName} />
+              </div>
+              <div className="recipe-name">{recipe.recipeName}</div>
+            </div>
+          ))}
         </div>
       </section>
     </div>
