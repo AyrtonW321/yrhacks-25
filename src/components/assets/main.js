@@ -41,16 +41,14 @@ export default async function buildPrompt(ingredients, nutrients, dietary, time)
   let arg = `These are all the recipes ${recipeData}, choose a recipe between them,
     Ingredients I have ${JSON.stringify(ingredients)}, you do not have to use all of them 
     but you cannot use more than what we have,
-    Nutrients I want are a lot of ${JSON.stringify(nutrients)},
-    The dietary restrictions I have are ${JSON.stringify(dietary)}, these must be followed,
-    I want to create the food in ${time} minutes, this is not concrete but should be around the time`;
-
-  let newRecipe = await aiFunctions.createRecipe(arg);
-  
-  // Store the recipe in the madeRecipes array
-  madeRecipes.push(newRecipe['recipeName']);
-  
-  return newRecipe;
+        Nutrients I want are a lot of ${JSON.stringify(nutrients)},
+        The dietary restrictions I have are ${JSON.stringify(dietary)}, these must be followed,
+        I want to create the food in ${time} minutes, this is not concrete but should be around the time,
+    `;
+    let newRecipe = aiFunctions.createRecipe(arg);
+    data.push(newRecipe);
+    made.push(newRecipe['recipeName'])
+    return newRecipe;
 }
 
 console.log(buildPrompt(['egg', 'vegetable', 'rice', 'sugar'], [], [], 'any'))
