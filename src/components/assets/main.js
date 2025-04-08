@@ -20,6 +20,8 @@ function buildPrompt(ingredients, nutrients, dietary, time){
     return newRecipe;
 }
 
+console.log(buildPrompt(['egg', 'vegetable', 'rice', 'sugar'], [], [], 'any'))
+
 // returns the category the food is in, based on given categories
 // first parameter the food
 // second parameter array of categories
