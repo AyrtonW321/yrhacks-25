@@ -5,38 +5,62 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.fridgeGridContainer{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;  
+  width: 100%;
+  max-width: 1200px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.fridgeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.categorySection{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;  
+  width: 100%;
+  max-width: 1200px;
+  padding-top: 20px;
 }
 
-.card {
-  padding: 2em;
+.category{
+  display: flex;
+  background-color: rgb(228, 223, 223);
+  padding-bottom: 50%;
+  padding-left: 30%;
+  padding-right: 30%;
+  justify-content: center;
+  align-items: center;
+  border: 3px;
+  border-color: rgb(161, 159, 159);
+  border-style: solid;
+  border-radius: 5%;
 }
 
-.read-the-docs {
-  color: #888;
+.foodInput{
+  border-color: rgb(161, 159, 159);
+  border-style: solid;
+  border-radius: 5px;
+  width: 300px;
+  height: 34px;
+}
+
+.addButton{
+  border:2px;
+  border-style: solid;
+  border-radius: 5px;
+  border-color: rgb(161, 159, 159);
+}
+
+.inputBar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
