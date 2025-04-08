@@ -1,5 +1,5 @@
-import Food from './Food';
-import Category from './Category';
+import Food from '../feature/Food';
+import Category from '../feature/Category';
 import './Fridge.css';
 
 function Fridge({ foodItems }) {

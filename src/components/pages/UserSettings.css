@@ -1,0 +1,185 @@
+.settingsIconBtn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+  margin: 10px;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  width: 100%;
+  max-width: 450px; 
+  background-color: rgb(247, 247, 247, 0.98);
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  padding: 15px; 
+  position: relative;
+}
+
+.modalContent h1 {
+  font-size: 1.5rem; 
+  letter-spacing: 1px;
+  color: #2b2b2b; 
+  position: relative;
+  z-index: 3;
+  opacity: 1;
+  margin-bottom: 15px; 
+  text-align: center;
+}
+
+.userSettingsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.textInputContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.textInputContainer label {
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: #2b2b2b;
+  font-size: 0.9rem;
+}
+
+.textInputContainer input {
+  width: 100%;
+  padding: 8px; 
+  color: black;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 0.9rem;
+}
+
+.inputBoxContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.inputBox {
+  width: 100%;
+}
+
+.inputBox label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px; 
+  color: #2b2b2b;
+  font-size: 0.9rem;
+}
+
+.allergyInputGroup {
+    display: flex;
+    width: 100%;
+    gap: 5px;
+}
+
+.allergyInputGroup input {
+    flex: 1;
+}
+
+.addAllergyButton {
+    padding: 8px 12px;
+    border: none;
+    background-color: #d5b096;
+    color: rgb(0, 0, 0);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.addAllergyButton:hover {
+    background-color: #ad917d;
+}
+
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 3px;
+}
+
+.radioOption {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.radioOption input[type="radio"] {
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px; 
+  height: 14px;
+  border: 2px solid #ccc;
+  border-radius: 50%;
+  outline: none;
+  position: relative;
+}
+
+.radioOption input[type="radio"]:checked {
+  border-color: #d5b096;
+}
+
+.radioOption input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px; 
+  height: 6px; 
+  background-color: #d5b096; 
+  border-radius: 50%;
+}
+
+.radioOption label {
+  cursor: pointer;
+  font-weight: normal;
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+.buttonContainer {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.saveButton {
+  padding: 8px 16px;
+  border: none;
+  background-color: #d5b096;
+  color: rgb(0, 0, 0);
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 0.9rem; 
+}
+
+.saveButton:hover {
+  background-color: #ad917d;
+}

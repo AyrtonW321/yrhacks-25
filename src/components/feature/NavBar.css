@@ -66,6 +66,7 @@ header a {
   font-weight: 500;
   margin-left: 40px;
   transition: color 0.3s;
+  text-decoration: none;
 }
 
 header.sticky a {
@@ -89,4 +90,23 @@ header.sticky a::before {
 
 header a:hover::before {
   width: 100%;
+}
+
+.settingsBtn {
+  background-color: #d5b096;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 0;
+  transition: background-color 0.3s;
+}
+
+.settingsBtn:hover {
+  background-color: #ad917d;
 }

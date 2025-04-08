@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 
-const NavBar = () => {
+const NavBar = ({ onSettingsClick }) => {
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
@@ -13,7 +15,6 @@ const NavBar = () => {
         window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('scroll', handleScroll);
-            
         };
     }, []);
 
@@ -26,16 +27,16 @@ const NavBar = () => {
                 </Link>
                 <nav className="navbar">
                     <Link to="/">Home</Link>
-                    <Link to="/fridge">My Fridge</Link>
-                    <Link to="/recipes">My Recipes</Link>
-                    <Link to="/shoppingList">My Shopping List</Link>
+                    <Link to="/Fridge">My Fridge</Link>
+                    <Link to="/Recipes">My Recipes</Link>
+                    <Link to="/ShoppingList">My Shopping List</Link>
                 </nav>
+                <button onClick={onSettingsClick} className="settingsBtn">
+                    <FontAwesomeIcon icon={faGear} />
+                </button>
             </div>
         </header>
-
-
     );
-
-}
+};
 
 export default NavBar;

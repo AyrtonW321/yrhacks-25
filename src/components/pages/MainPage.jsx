@@ -28,49 +28,49 @@ const MainPage = () => {
             {/* TODO Placeholder */}
             <div className='mainPageContainer'>
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Pasta Primavera</h2>
                     <p>Fresh vegetables and pasta in a light cream sauce</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Chicken Alfredo</h2>
                     <p>Creamy pasta with grilled chicken and parmesan</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Vegetable Curry</h2>
                     <p>Spicy vegetable curry with coconut milk and rice</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Beef Stir Fry</h2>
                     <p>Quick and easy beef stir fry with vegetables</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Pasta Primavera</h2>
                     <p>Fresh vegetables and pasta in a light cream sauce</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Chicken Alfredo</h2>
                     <p>Creamy pasta with grilled chicken and parmesan</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Vegetable Curry</h2>
                     <p>Spicy vegetable curry with coconut milk and rice</p>
                 </div>
 
                 <div className='mainPageCard'>
-                    <img src="public/pasta.jpeg" className='img' alt='Image of Food' />
+                    <img src="/pasta.jpeg" className='img' alt='Image of Food' />
                     <h2>Beef Stir Fry</h2>
                     <p>Quick and easy beef stir fry with vegetables</p>
                 </div>
