@@ -1,24 +1,35 @@
 import * as aiFunctions from './googleApi.js';
+import * as a from './algorithms.js';
 
-let recipeData = 'public/datasets/food-ingredients-and-recipe-dataset-with-images/mapping.json';
+let recipeData = [];
+let recipeNames = []
 
 const recipeDataURL = 'public/datasets/food-ingredients-and-recipe-dataset-with-images/mapping.json'
 
 // fetch json data
-fetch(recipeDataURL)  // Replace with your URL
-  .then(response => {
-    // Check if the response is okay (status 200-299)
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+async function fetchRecipeData() {
+    try {
+      const response = await fetch(recipeDataURL); // Replace with your URL
+      // Check if the response is okay (status 200-299)
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      
+      recipeData = await response.json(); // Parse the JSON from the response
+      // Now populate the recipeNames array
+      if (recipeNames && Array.isArray(recipeNames)) {
+        // Only proceed if the data is an array
+        for (let i = 0; i < recipeData.length; i++) {
+          recipeNames.push(recipeData[i].Title);
+        }
+      }
+    } catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
     }
-    return response.json();  // Parse the JSON from the response
-  })
-  .then(recipeData => {
-    console.log(recipeData);  // Handle the JSON data (an object or array)
-  })
-  .catch(error => {
-    console.error('There was a problem with the fetch operation:', error);
-});
+  }
+  
+  // Call the function to fetch the data
+fetchRecipeData();
 
 // depending on what is in the fridge make sure we have enough ingredients
 // create an argument for the ai
@@ -51,4 +62,17 @@ function foodType(food, categories){
 function findImage(path){
     let name = aiFunctions.readImage(path)
     console.log(name);
+}
+
+function searchRecipe(input){
+    let sorter = new a.MergeSortLL(recipeNames);
+    let sortedRecipeIndexs = sorter.sort(a.compareAlphaAscending)
+    let sortedRecipes = a.indexToData(sortedRecipeIndexs, recipeNames);
+    let sortedData = a.indexToData(sortedRecipeIndexs, recipeData);
+
+    console.log(sortedRecipes)
+
+    let searchedIndexs = a.binarySearch(input, sortedRecipes, a.compareAlphaDescending);
+    let searchedData = a.indexToData(searchedIndexs, sortedData);
+    return searchedData;
 }
