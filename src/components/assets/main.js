@@ -3,55 +3,44 @@ import * as a from './algorithms.js';
 
 let recipeData = [];
 let recipeNames = [];
-let madeRecipes = []; // Added to replace the undefined 'made' variable
+let madeRecipes = []; // For tracking generated recipes
 
 const recipeDataURL = '/datasets/food-ingredients-and-recipe-dataset-with-images/mapping.json';
 
-// fetch json data
 async function fetchRecipeData() {
   try {
     const response = await fetch(recipeDataURL);
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     
-    // First check if response is OK
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    
-    // Check if response is JSON
     const contentType = response.headers.get('content-type');
     if (!contentType || !contentType.includes('application/json')) {
       throw new Error('Response is not JSON');
     }
 
     recipeData = await response.json();
-    
-    // Now populate the recipeNames array
     if (recipeData && Array.isArray(recipeData)) {
       recipeNames = recipeData.map(item => item.Title);
     }
   } catch (error) {
-    console.error('There was a problem with the fetch operation:', error);
-    // You might want to set default data here if fetch fails
+    console.error('Fetch error:', error);
     recipeData = [];
     recipeNames = [];
   }
 }
 
-export default async function buildPrompt(ingredients, nutrients, dietary, time) {
-  let arg = `These are all the recipes ${recipeData}, choose a recipe between them,
-    Ingredients I have ${JSON.stringify(ingredients)}, you do not have to use all of them 
-    but you cannot use more than what we have,
-        Nutrients I want are a lot of ${JSON.stringify(nutrients)},
-        The dietary restrictions I have are ${JSON.stringify(dietary)}, these must be followed,
-        I want to create the food in ${time} minutes, this is not concrete but should be around the time,
-    `;
-    let newRecipe = aiFunctions.createRecipe(arg);
-    data.push(newRecipe);
-    made.push(newRecipe['recipeName'])
-    return newRecipe;
-}
+fetchRecipeData();
 
-console.log(buildPrompt(['egg', 'vegetable', 'rice', 'sugar'], [], [], 'any'))
+export async function buildPrompt(text) {
+  try {
+    const arg = `Choose a recipe from ${JSON.stringify(recipeData)}, must be between these, and base it off of this text: ${text}`;
+    const newRecipe = await aiFunctions.createRecipe(arg);
+    madeRecipes.push(newRecipe.recipeName);
+    return newRecipe;
+  } catch (error) {
+    console.error('Error generating recipe:', error);
+    throw error;
+  }
+}
 
 // returns the category the food is in, based on given categories
 // first parameter the food
@@ -65,8 +54,6 @@ export async function foodType(food, categories) {
   // returns other if there really is not an option
   return category
 }
-
-console.log(foodType("egg", ["vegetables", "meat", "fruit"]))
 function searchRecipe(input) {
   let sorter = new a.MergeSortLL(recipeNames);
   let sortedRecipeIndexs = sorter.sort(a.compareAlphaAscending)
