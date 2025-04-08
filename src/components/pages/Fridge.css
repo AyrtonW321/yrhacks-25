@@ -33,18 +33,20 @@
     background-color: white;
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     flex-direction: column;
     color: #666;
     font-size: 0.9rem;
   }
   
   .foodInput{
-    border-color: rgb(161, 159, 159);
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 200px;
-    height: 40px;
+    padding: 12px 25px;
+    margin: 0 5px;
+    color: black;
+    background-color: white;
+    border: 2px solid #d5b096;
+    border-radius: 30px;
+    flex: 1;
   }
   
   .addButton{
@@ -58,17 +60,17 @@
   
   .fridgeBar{
     width: 100%;
-    max-width: 600px;
+    max-width: 1200px; /* Match the grid */
     margin: 20px auto;
+    padding: 20px;
     text-align: center;
   
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 15px;
   
-    background-color: rgba(247, 247, 247, 0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   }
@@ -89,20 +91,24 @@
   }
 
   .quantityInput{
-    border-color: rgb(161, 159, 159);
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 130px;
-    height: 40px;
+    padding: 12px 25px;
+    margin: 0 5px;
+    color: black;
+    background-color: white;
+    border: 2px solid #d5b096;
+    border-radius: 30px;
+    flex: 1;
   }
 
   .expiryDate{
-    border-color: rgb(161, 159, 159);
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    width: 130px;
-    height: 40px;
-    color: #666;
+    padding: 12px 25px;
+    margin: 0 5px;
+    color: black;
+    background-color: white;
+    border: 2px solid #d5b096;
+    border-radius: 30px;
+    flex: 1;
+    height: 50px
   }
 
   .expiryDate::before{
